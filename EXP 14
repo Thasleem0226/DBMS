@@ -1,0 +1,56 @@
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| department         |
+| faculty            |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use student;
+Database changed
+mysql> desc stu;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Rollno | int(10)     | NO   | PRI | 0       |       |
+| Name   | varchar(20) | YES  |     | NULL    |       |
+| Dept   | varchar(4)  | YES  |     | NULL    |       |
+| Gender | varchar(1)  | YES  |     | NULL    |       |
+| city   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create user thasleem;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant all on student to thasleem
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show the grants for thasleem;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the grants for thasleem' at line 1
+mysql> show grants for thasleem;
++---------------------------------------------------------------+
+| Grants for thasleem@%                                         |
++---------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'thasleem'@'%'                          |
+| GRANT ALL PRIVILEGES ON `student`.`student` TO 'thasleem'@'%' |
++---------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on student from thasleem;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for thasleem;
++--------------------------------------+
+| Grants for thasleem@%                |
++--------------------------------------+
+| GRANT USAGE ON *.* TO 'thasleem'@'%' |
++--------------------------------------+
+1 row in set (0.00 sec)
